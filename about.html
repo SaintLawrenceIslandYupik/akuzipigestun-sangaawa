@@ -349,5 +349,9 @@
     <script type="text/javascript" src="dictionary_js/citation_abbreviations.js"></script>
     <script type="text/javascript" src="dictionary_js/scrollButton.js"></script>
     <script type="text/javascript" src="dictionary_js/components/nav.js"></script>
-    <script type="text/javascript" src="dictionary_js/components/footer.js"></script>
+    <script>
+        if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('sw.js')
+        }
+    </script>
 </body>

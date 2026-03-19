@@ -1,4 +1,14 @@
 {
+  "name": "akuzipigestun-sangaawa",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node build-sw.js",
+    "start": "http-server . -p 8080"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "workbox-build": "^7.0.0"
+  },
   "dependencies": {
     "workbox-precaching": "^7.3.0"
   }

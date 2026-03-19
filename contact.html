@@ -98,6 +98,9 @@
         entryIDAutofill.value = entry ? entry : "N/A";
         headwordAutofill.value = headword ? headword : "N/A";
 
+        if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('sw.js')
+        }
     </script>
 </body>
 </html>
