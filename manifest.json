@@ -1,7 +1,7 @@
 {
 "name": "Akuzipigestun Sangaawa: An electronic dictionary for St. Lawrence Island Akuzipik",
 "short_name": "Akuzipigestun Sangaawa",
-"start_url": "https://bhunt6.github.io/akuzipigestun-sangaawa/",
+"start_url": "./index.html",
 "display": "standalone",
 "description": "An searchable, morphologically-aware implementation of ST.LAWRENCE ISLAND/SIBERIAN YUPIK ESKIMO DICTIONARY (Badten et al, 2008)",
 "lang": "English",

@@ -319,6 +319,10 @@
                 citationLink();
                 relatedWords(currentEntry);
             }
+            
+            if (typeof navigator.serviceWorker !== 'undefined') {
+                navigator.serviceWorker.register('sw.js')
+            }
     </script>
 </body>
 </html>
