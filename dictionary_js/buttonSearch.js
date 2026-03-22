@@ -156,6 +156,11 @@ const searchController = (e) => {
     else if(document.getElementById("akuzSearch").checked){
         akuzSearch(searchString);
     }
+
+    // Auto-scroll to results smoothly
+    if (results && typeof results.scrollIntoView === 'function') {
+        results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 };
 
 const setParse = (token) => {
