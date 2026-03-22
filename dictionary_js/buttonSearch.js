@@ -209,7 +209,7 @@ const searchController = (e) => {
     }
 
     if (results.innerHTML.trim() === "") {
-        results.innerHTML = `<div style="padding: 2rem; text-align: center; color: #555;">No results found for "<b>${searchString}</b>". Trying checking your spelling, or contact us to add it!</div>`;
+        results.innerHTML = `<div style="margin-bottom: auto; margin-top: 2rem; text-align: center; color: #555;">No results found for "<b>${searchString}</b>". Trying checking your spelling, or contact us to add it!</div>`;
     }
 };
 

@@ -253,7 +253,7 @@ define(['./workbox-b3ca1ef5'], (function (workbox) { 'use strict';
     "revision": "9d956fdaee72f066e22352163e2c218f"
   }, {
     "url": "dictionary_js/buttonSearch.js",
-    "revision": "6aa270091b0a2b270501d948a1d5ed3e"
+    "revision": "6aabee179357b6ae095153038ace20e8"
   }, {
     "url": "dictionary_js/bases62625.js",
     "revision": "06314f121c1bb79094c19c8b1420efc5"
