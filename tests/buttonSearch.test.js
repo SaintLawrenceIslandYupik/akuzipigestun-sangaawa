@@ -10,6 +10,9 @@ global.pbLEX = [
     { UUID: "3", headword: "-tuq", search_word: ["-tuq", "tuq"], gloss: ["3s indicative"], examples: [], notes: [] }
 ];
 
+// Load Fuse.js manually since buttonSearch.js expects it globally
+global.Fuse = require('../dictionary_js/fuse.js');
+
 // Load buttonSearch into global context
 const buttonSearchCode = fs.readFileSync(path.join(__dirname, '../dictionary_js/buttonSearch.js'), 'utf8');
 
@@ -20,6 +23,7 @@ const exportedFunctions = eval(`
         return { 
             exactMatch: typeof exactMatch !== 'undefined' ? exactMatch : null, 
             containsMatch: typeof containsMatch !== 'undefined' ? containsMatch : null, 
+            fuzzyMatch: typeof fuzzyMatch !== 'undefined' ? fuzzyMatch : null,
             englishSearch: typeof englishSearch !== 'undefined' ? englishSearch : null, 
             searchController: typeof searchController !== 'undefined' ? searchController : null 
         };
@@ -28,6 +32,7 @@ const exportedFunctions = eval(`
 
 global.exactMatch = exportedFunctions.exactMatch;
 global.containsMatch = exportedFunctions.containsMatch;
+global.fuzzyMatch = exportedFunctions.fuzzyMatch;
 global.englishSearch = exportedFunctions.englishSearch;
 const searchController = exportedFunctions.searchController;
 
@@ -51,6 +56,20 @@ describe('Search Functions', () => {
             const results = containsMatch('nenglli');
             expect(results.length).toBe(1);
             expect(results[0].headword).toBe('nenglligh-');
+        });
+    });
+
+    describe('fuzzyMatch', () => {
+        it('should fallback to correct match when word is slightly misspelled', () => {
+            const results = global.fuzzyMatch('qavagh', 'word'); // Slightly misspelling "qavagh-"
+            expect(results.length).toBe(1);
+            expect(results[0].headword).toBe('qavagh-');
+        });
+
+        it('should fallback to correct gloss when english term slightly resembles it', () => {
+            const results = global.fuzzyMatch('slepp', 'gloss'); // "slepp" instead of "sleep"
+            expect(results.length).toBe(1);
+            expect(results[0].headword).toBe('qavagh-');
         });
     });
 

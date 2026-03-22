@@ -43,6 +43,31 @@ function containsMatch(term){
     return results;
 }
 
+// Initialize Fuse instances lazily to avoid heavy array blocking on load
+let fuseLexWord = null;
+let fusePbLexWord = null;
+let fuseLexGloss = null;
+
+const fuseOptionsWord = { includeScore: true, threshold: 0.35, keys: ['search_word', 'cyrillic'] };
+const fuseOptionsGloss = { includeScore: true, threshold: 0.35, keys: ['gloss', 'notes'] };
+
+function fuzzyMatch(term, type) {
+    let result = [];
+    if (type === "word") {
+        if (!fuseLexWord) fuseLexWord = new Fuse(LEX, fuseOptionsWord);
+        if (!fusePbLexWord) fusePbLexWord = new Fuse(pbLEX, fuseOptionsWord);
+        
+        let fuzzyWord = fuseLexWord.search(term).map(r => r.item);
+        let fuzzyPb = fusePbLexWord.search(term).map(r => r.item);
+        result = fuzzyWord.concat(fuzzyPb);
+    } else {
+        if (!fuseLexGloss) fuseLexGloss = new Fuse(LEX, fuseOptionsGloss);
+        result = fuseLexGloss.search(term).map(r => r.item);
+    }
+    // Limit to top 20 to avoid a massive page
+    return result.slice(0, 20);
+}
+
 function printSearch(displayTerm, first, second = []){
     //Print results in section
     let termResults = first.concat(second.filter((item) => first.indexOf(item) < 0));
@@ -94,7 +119,18 @@ function akuzSearch(term){
     else{
         var exactWord = exactMatch(term.toLowerCase());
         var containsWord = containsMatch(term.toLowerCase());
-        printSearch(term, exactWord, containsWord);
+
+        if (exactWord.length === 0 && containsWord.length === 0) {
+            var fuzzyResults = fuzzyMatch(term.toLowerCase(), "word");
+            if (fuzzyResults.length > 0) {
+                results.innerHTML += `<span class="results_section">No exact matches for <i>${term}</i>. Did you mean:</span>`;
+                displayWords(fuzzyResults);
+            } else {
+                printSearch(term, exactWord, containsWord);
+            }
+        } else {
+            printSearch(term, exactWord, containsWord);
+        }
     }
 };
 
@@ -137,7 +173,17 @@ function englishSearch(term) {
     filteredLexicon = filteredLexicon.concat(filteredExamples.filter((item) => filteredLexicon.indexOf(item) < 0));
     filteredLexicon = filteredLexicon.concat(filteredNotes.filter((item) => filteredLexicon.indexOf(item) < 0));
 
-    displayWords(filteredLexicon);
+    if (filteredLexicon.length === 0) {
+        let fuzzyResults = fuzzyMatch(term.toLowerCase(), "gloss");
+        if (fuzzyResults.length > 0) {
+            results.innerHTML += `<span class="results_section">No exact matches for <i>${term}</i>. Did you mean:</span>`;
+            displayWords(fuzzyResults);
+        } else {
+            displayWords(filteredLexicon);
+        }
+    } else {
+        displayWords(filteredLexicon);
+    }
 };
 
 const searchController = (e) => {

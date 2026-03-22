@@ -82,13 +82,16 @@ define(['./workbox-b7e2fd85'], (function (workbox) { 'use strict';
    */
   workbox.precacheAndRoute([{
     "url": "results.html",
-    "revision": "ac272263733cd6e35fa4956cfde79f16"
+    "revision": "25105d2a45c97ef2c7c70789d9c16530"
   }, {
     "url": "manifest.json",
     "revision": "67e1967ac7e741f988fa235c4f930565"
   }, {
+    "url": "jest.config.js",
+    "revision": "ba4ca57de9e5462edf135645302ef77c"
+  }, {
     "url": "index.html",
-    "revision": "d1764b254915db014eef46b8da92b3ef"
+    "revision": "ee6569df8588841f4436b9027ff60180"
   }, {
     "url": "homepage.png",
     "revision": "561c4f82873fab270ed55d56c0b6cf08"
@@ -101,6 +104,12 @@ define(['./workbox-b7e2fd85'], (function (workbox) { 'use strict';
   }, {
     "url": "about.html",
     "revision": "692f7af8bcab8d8d1d6b72597e264aa9"
+  }, {
+    "url": "tests/parseWord.test.js",
+    "revision": "266acb560dc6b15d4ae964de16211f0e"
+  }, {
+    "url": "tests/buttonSearch.test.js",
+    "revision": "c84e1aea23310c5135e2021dbd8c0434"
   }, {
     "url": "icons/word_wheel.png",
     "revision": "c620bffe21df54c84a7d382d3ddad6c0"
@@ -225,6 +234,9 @@ define(['./workbox-b7e2fd85'], (function (workbox) { 'use strict';
     "url": "dictionary_js/inflections.js",
     "revision": "fdc081999a98c35f7d7404e02f6e58bd"
   }, {
+    "url": "dictionary_js/fuse.js",
+    "revision": "20bb220ac589785167bd87d1acc1f0a7"
+  }, {
     "url": "dictionary_js/foma_apply_down.js",
     "revision": "58e1a0e5e95589e8938964ff4b32332d"
   }, {
@@ -244,7 +256,7 @@ define(['./workbox-b7e2fd85'], (function (workbox) { 'use strict';
     "revision": "9d956fdaee72f066e22352163e2c218f"
   }, {
     "url": "dictionary_js/buttonSearch.js",
-    "revision": "e4772617b327c863436a205fa7a4a0bd"
+    "revision": "7b0ebc39eab5661ab5478ebd4a0e84d6"
   }, {
     "url": "dictionary_js/bases62625.js",
     "revision": "06314f121c1bb79094c19c8b1420efc5"
