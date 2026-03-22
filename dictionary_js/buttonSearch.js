@@ -207,6 +207,10 @@ const searchController = (e) => {
     if (results && typeof results.scrollIntoView === 'function') {
         results.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
+    if (results.innerHTML.trim() === "") {
+        results.innerHTML = `<div style="padding: 2rem; text-align: center; color: #555;">No results found for "<b>${searchString}</b>". Trying checking your spelling, or contact us to add it!</div>`;
+    }
 };
 
 const setParse = (token) => {
