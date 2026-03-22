@@ -67,13 +67,10 @@ if (!self.define) {
     });
   };
 }
-define(['./workbox-b7e2fd85'], (function (workbox) { 'use strict';
+define(['./workbox-b3ca1ef5'], (function (workbox) { 'use strict';
 
-  self.addEventListener('message', event => {
-    if (event.data && event.data.type === 'SKIP_WAITING') {
-      self.skipWaiting();
-    }
-  });
+  self.skipWaiting();
+  workbox.clientsClaim();
 
   /**
    * The precacheAndRoute() method efficiently caches and responds to
@@ -256,7 +253,7 @@ define(['./workbox-b7e2fd85'], (function (workbox) { 'use strict';
     "revision": "9d956fdaee72f066e22352163e2c218f"
   }, {
     "url": "dictionary_js/buttonSearch.js",
-    "revision": "7b0ebc39eab5661ab5478ebd4a0e84d6"
+    "revision": "6aa270091b0a2b270501d948a1d5ed3e"
   }, {
     "url": "dictionary_js/bases62625.js",
     "revision": "06314f121c1bb79094c19c8b1420efc5"

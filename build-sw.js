@@ -22,7 +22,9 @@ generateSW({
     /^fbclid$/,
     /^search$/,
     /^lang$/
-  ]
+  ],
+  skipWaiting: true,
+  clientsClaim: true
 }).then(({count, size, warnings}) => {
   warnings.forEach(console.warn);
   console.log(`${count} files will be precached, totaling ${size} bytes.`);
