@@ -1,11 +1,13 @@
 class Footer extends HTMLElement {
   constructor() {
     super();
+
+    this.year = new Date().getFullYear()
   }
 
   connectedCallback() {
     this.innerHTML = `
-        <div id="footer1">© 2026 St. Lawrence Island</div>
+        <div id="footer1">© ${this.year} St. Lawrence Island</div>
         <div id="footer2"><b>Data and entries sourced from: </b>
             <br> 
             Badten, L.W. (Aghnaghaghpik), 
