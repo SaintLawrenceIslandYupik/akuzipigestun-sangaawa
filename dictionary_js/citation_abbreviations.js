@@ -174,7 +174,7 @@ const citations = [
         "title":"Ighsanitalghii Afsengaq",
         "id":"Badten1972",
         "short_citation":"Badten (1972)",
-        "full_citation":""
+        "full_citation":"Badten, Adelinda W. (Aghnaghaghpik), and Michael E. Krauss. translator, 1972. Ighsanitalghii Afsengaq (The lazy mouse). Fairbanks:Alaska Native Language Program. Translation from Central Yup'ik Qessanquq Avelngaq (Mather, E.1971), without English translation."
     },
     {
         "abbreviation":"KALLAG.",
