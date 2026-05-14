@@ -72,17 +72,39 @@ function akuzSearch(term){
 
         let parsedRoot = parsedRootList[0];
         var postBases = parsedRootList.slice(1,parsedRootList.length);
-        setParse(parsedRootList);
+        // console.log("parsed: ", parsedRootList);
+        // console.log("postbases: ", postBases);
+        let inflection = [];
+        let clitic = [];
+        for(let i=0;i<postBases.length;i++){
+            let infl = postBases[i]
+            if(infl.includes("[")){
+                inflection.push(infl);
+                postBases.splice(i,1);
+                i--;
+            }
+            else if(infl.includes("=")){
+                clitic.push(infl);
+                postBases.splice(i,1);
+                i--;
+            }
+            // console.log("inflection: ", inflection);
+            // console.log("postbases: ", postBases);
+            // console.log("clitic: ", clitic);
+        }
+
+        //This doesn't always supply the correct parse: ex. qavaghtuq >> qavagh + NULL + =tuq (clitic)
+        setParse(parsedRootList, parsedRoot, postBases, inflection, clitic);
         //exact match parsed root
         var exactParsedRoot = exactMatch(parsedRoot.toLowerCase());
         var containsParsedRoot = containsMatch(parsedRoot.toLowerCase());
         printSearch(parsedRoot, exactParsedRoot, containsParsedRoot);
 
         //exact match postbases
-        for(let i=0; i < postBases.length-1; i++){
+        for(let i=0; i < postBases.length; i++){
 
             let pb = pbLEX.filter((word) =>
-                word.search_word.join(", ").toLowerCase().includes("-" + postBases[i].replace(/[\@\~\–\-\+\?\±\%\:]/g, "").replace(/\<su[bp]\>[\d*ef]\<\/su[bp]\>/g, "") + "-")
+                word.search_word.join(", ").toLowerCase().includes("-" + postBases[i].replace(/\~[sf]/g, "").replace(/[\@\–\-\+\?\±\%\:]/g, "").replace(/\<su[bp]\>[\d*ef]\<\/su[bp]\>/g, "").replace(/\([NV]→[NV]\)/g, "") + "-")
             );
             if(pb && pb.length){
                 results.innerHTML += `<span class="results_section">Results for <i>${postBases[i]}</i>:</span>`
@@ -158,17 +180,27 @@ const searchController = (e) => {
     }
 };
 
-const setParse = (token) => {
+const setParse = (token, root, postBases, infl, clitic) => {
     if(token == ""){
         document.getElementById("parse").style.display = "none";
     }
     else{
         document.getElementById("parse").style.display = "flex";
         const morphs = document.getElementById("morphs");
-        let output = `<span class='base'>${token[0]}</span>`;
+        let output = `<span class='base'>${root}</span>`;
     
-        for(i=1; i<token.length; i++){
-            output += `<span class='morpheme'>+ ${token[i]}</span>`;
+        for(let i=0; i<postBases.length; i++){
+            let noSymbols = postBases[i].replace(/\~[sf]/g, "").replace(/[\@\–\-\+\?\±\%\:]/g, "").replace(/\<su[bp]\>[\d*ef]\<\/su[bp]\>/g, "").replace(/\([NV]→[NV]\)/g, "");
+            output += `<span class='morpheme' title=${token[i+1]}>+ ${noSymbols}</span>`;
+        }
+        if(infl.length>0){
+            let tempInfl = infl.join("^");
+            output += `<span class='morpheme' title=${tempInfl}>+ ${inflReplace[tempInfl].replace(/\^/g, "-")}</span>`;
+        }
+        
+        if(clitic.length>0){
+            console.log(clitic);
+            output += `<span class='morpheme' title=${clitic}>+ ${clitic}</span>`;
         }
     
         morphs.innerHTML = output;
