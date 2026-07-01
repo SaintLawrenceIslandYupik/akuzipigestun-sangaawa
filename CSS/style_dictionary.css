@@ -22,7 +22,7 @@
 	min-height: 100%;
 	min-width: 100%;
 	grid-template-columns: 1fr 3fr 3fr 1fr;
-	grid-template-rows: minmax(10.5rem, auto) .4em 9rem 6.25rem 6rem 6rem minmax(6.25rem, auto) minmax(12.5rem, auto) 8rem;
+	grid-template-rows: minmax(10.5rem, auto) .4em 9rem 6.25rem 6rem 6rem minmax(6.25rem, auto) 2rem minmax(12.5rem, auto) 8rem;
 	grid-template-areas: 
 		". title title title"
 		". border border ."
@@ -31,8 +31,24 @@
 		". wod wod ."
 		". cats cats ."
 		". parse parse ."
+		". export export ."
 		". results results ."
 		"footer footer footer footer";
+}
+
+.export{
+	grid-area: export;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: self-end;
+}
+
+#exportButton{
+	display: none;
+	border: none;
+	background: none;
+	cursor: pointer;
 }
 
 div#banner_notice { 

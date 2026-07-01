@@ -26,4 +26,5 @@ function sameTag(tag){
     //let filteredLexicon = filteredGlossExact.concat(filteredGloss.filter((item) => filteredGlossExact.indexOf(item) <0));
 
     displayWords(allList);
+    setCsvString(allList);
 }

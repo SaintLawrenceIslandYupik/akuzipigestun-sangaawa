@@ -1,14 +1,14 @@
 //Old buttonSearch
-const buttonSearch = (e) => {
-    var searchString = searchInput.value.toLowerCase();
-    const filteredLexicon = LEX.filter((word) =>
+// const buttonSearch = (e) => {
+//     var searchString = searchInput.value.toLowerCase();
+//     const filteredLexicon = LEX.filter((word) =>
 
-        word.search_word.join(", ").toLowerCase().includes(searchString) ||
-        word.gloss.some(gloss => gloss.includes(searchString))
-    );
+//         word.search_word.join(", ").toLowerCase().includes(searchString) ||
+//         word.gloss.some(gloss => gloss.includes(searchString))
+//     );
 
-    displayWords(filteredLexicon);
-};
+//     displayWords(filteredLexicon);
+// };
 
 function exactMatch(term){
     let searchString = term;
@@ -50,6 +50,7 @@ function printSearch(displayTerm, first, second = []){
         results.innerHTML += `<span class="results_section">Results for <i>${displayTerm}</i>:</span>`;
     }
     displayWords(termResults);
+    setCsvString(termResults);
 }
 
 function akuzSearch(term){
@@ -63,6 +64,7 @@ function akuzSearch(term){
             results.innerHTML += `<span class="results_section">Results for <i>${term}</i>:</span>`
         }
         displayWords(pb);
+        setCsvString(pb);
     }
     if(parsedRootList){
         let initialMatch = exactMatch(term.toLowerCase());
@@ -110,6 +112,7 @@ function akuzSearch(term){
                 results.innerHTML += `<span class="results_section">Results for <i>${postBases[i]}</i>:</span>`
             }
             displayWords(pb);
+            setCsvString(pb);
         }
     }
     //exact and contains searches if word could not be parsed
@@ -160,6 +163,7 @@ function englishSearch(term) {
     filteredLexicon = filteredLexicon.concat(filteredNotes.filter((item) => filteredLexicon.indexOf(item) < 0));
 
     displayWords(filteredLexicon);
+    setCsvString(filteredLexicon);
 };
 
 const searchController = (e) => {

@@ -23,6 +23,29 @@ const displayWords = (words) => {
     setTag();
 };
 
+const setCsvString = (words) => {
+    csvString = "data:text/csv;charset=utf-8,\n"
+    csvString += "headword,gloss,part of speech,tags,examples,ipa,cyrillic\n";
+    for(let i=0; i<words.length; i++){
+        let word = words[i];
+        let headword = word.headword;
+        let gloss = word.gloss.join("; ");
+        let pos = word.pos;
+        let tags = word.tags.join("; ");
+        let examples = word.examples.join("; ");
+        let ipa = word.ipa;
+        let cyrillic = word.cyrillic;
+        csvString += `${headword},${gloss},${pos},${tags},${examples},${ipa},${cyrillic}\n`;
+    }
+    console.log(csvString);
+    document.getElementById("exportButton").style.display = "block";
+}
+
+const exportToCSV = () => {
+    var encodedUri = encodeURI(csvString);
+    window.open(encodedUri);
+};
+
 const tagString = (tags) => {
     let tagStr = "";
     if(!Array.isArray(tags)){
