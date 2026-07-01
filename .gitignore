@@ -6,3 +6,5 @@ searchAlgorithm.txt
 # Archived files
 archived/
 node_modules/
+dictionary_js/components/banner.js
+dictionary_js/components/searchbar.js
