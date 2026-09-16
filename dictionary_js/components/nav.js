@@ -11,7 +11,7 @@ class Navigation extends HTMLElement {
             <a href="https://morphology.akuzipik.info/" data-title="Morphological Analyzer"><img src="icons/analyzer_hires.png" width="52" height="51" alt="Morphological Analyzer" /></a>
         </div>
         <div id="row2" class="navRow">
-            <a href="https://saintlawrenceislandyupik.github.io/web_tools/index_utilities.html" data-title="Orthotactic Spellchecker"><img src="icons/spellchecker_hires.png" width="53" height="51" alt="Orthotactic Spellchecker" /></a>
+            <a href="https://alla.akuzipik.info" data-title="Orthotactic Spellchecker"><img src="icons/spellchecker_hires.png" width="53" height="51" alt="Orthotactic Spellchecker" /></a>
             <a href="contact.html" data-title="Contact Us"><img src="icons/contact_hires.png" width="52" height="37" alt="Contact Us" /></a>
             <a href="about.html" data-title="About"><img src="icons/about.png" width="51" height="43" alt="About the Dictionary"></a>
         </div>
