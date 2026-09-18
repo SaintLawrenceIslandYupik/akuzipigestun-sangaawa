@@ -16,11 +16,9 @@ function exactMatch(term){
     //Exact match
     let exactWord = LEX.filter((word) =>
         word.search_word.some(search_word => search_word.toLowerCase() == searchString)
-        //word.search_word.join(", ").toLowerCase() == searchString
     );
     let exactPb = pbLEX.filter((word) =>
         word.search_word.some(search_word => search_word.toLowerCase() == searchString)
-        //word.search_word.join(", ").toLowerCase() == searchString
     );
     result = exactWord.concat(exactPb);
     return result
@@ -65,6 +63,7 @@ function akuzSearch(term){
         }
         displayWords(pb);
         setCsvString(pb);
+        return;
     }
     if(parsedRootList){
         let initialMatch = exactMatch(term.toLowerCase());
@@ -95,7 +94,6 @@ function akuzSearch(term){
             // console.log("clitic: ", clitic);
         }
 
-        //This doesn't always supply the correct parse: ex. qavaghtuq >> qavagh + NULL + =tuq (clitic)
         setParse(parsedRootList, parsedRoot, postBases, inflection, clitic);
         //exact match parsed root
         var exactParsedRoot = exactMatch(parsedRoot.toLowerCase());
@@ -112,7 +110,7 @@ function akuzSearch(term){
                 results.innerHTML += `<span class="results_section">Results for <i>${postBases[i]}</i>:</span>`
             }
             displayWords(pb);
-            setCsvString(pb);
+            setCsvString(pb, 1);
         }
     }
     //exact and contains searches if word could not be parsed
@@ -185,6 +183,7 @@ const searchController = (e) => {
 };
 
 const setParse = (token, root, postBases, infl, clitic) => {
+    console.log(token);
     if(token == ""){
         document.getElementById("parse").style.display = "none";
     }
