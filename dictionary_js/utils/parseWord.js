@@ -36,7 +36,9 @@ function parseWord(term) {
         //var symbols = ["~", "–", ")"];
         //var finalList = new Array;
 
-        let shortestParse = token.reduce((prev, next) => prev.length > next.length ? next : prev)
+        let shortestParse = token.reduce(function(a, b) { 
+            return a.length < b.length ? a : b; 
+        });
         // for (var m = 0; m < shortestParse.length; m++) {
         //     searchToken = shortestParse[m].split("[")[0];
             
