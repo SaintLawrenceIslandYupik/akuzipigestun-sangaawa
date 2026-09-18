@@ -23,9 +23,11 @@ const displayWords = (words) => {
     setTag();
 };
 
-const setCsvString = (words) => {
-    csvString = "data:text/csv;charset=utf-8,\n"
-    csvString += "headword,gloss,part of speech,tags,examples,ipa,cyrillic\n";
+const setCsvString = (words, addToString) => {
+    //csvString = "data:text/csv;charset=utf-8,\uFEFF"
+    if(!addToString) {
+    csvString = "headword\tgloss\tpart of speech\ttags\texamples\tipa\tcyrillic\r\n";
+    }
     for(let i=0; i<words.length; i++){
         let word = words[i];
         let headword = word.headword;
@@ -35,15 +37,25 @@ const setCsvString = (words) => {
         let examples = word.examples.join("; ");
         let ipa = word.ipa;
         let cyrillic = word.cyrillic;
-        csvString += `${headword},${gloss},${pos},${tags},${examples},${ipa},${cyrillic}\n`;
+        csvString += `${headword}\t${gloss}\t${pos}\t${tags}\t${examples}\t${ipa}\t${cyrillic}\r\n`;
     }
     console.log(csvString);
     document.getElementById("exportButton").style.display = "block";
 }
 
-const exportToCSV = () => {
-    var encodedUri = encodeURI(csvString);
-    window.open(encodedUri);
+const exportToCSV = (searchString) => {
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8,\uFEFF' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `results_${searchString}_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // var encodedUri = encodeURIComponent(csvString);
+    // window.open(encodedUri);
 };
 
 const tagString = (tags) => {
