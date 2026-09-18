@@ -203,6 +203,7 @@ input[type='radio']:checked {
 	font-family: 'Josefin Sans', sans-serif;
 	font-weight: bold;
 	margin-bottom: 1rem;
+	margin-top: 1rem;
 }
 
 .section{
@@ -281,6 +282,11 @@ p {
 
 .references{
 	grid-area: references;
+}
+
+#references p {
+  text-indent: -2em; 
+  padding-left: 2em;
 }
 
 .twoColumn{
